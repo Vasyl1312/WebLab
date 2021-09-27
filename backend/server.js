@@ -12,7 +12,7 @@ const app=express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // eslint-disable-next-line no-undef
-mongoose.connect(process.env.MONGODB_URL ||'mongodb://localhost/FootballShop', {
+mongoose.connect(process.env.MONGODB_URL ||'mongodb+srv://vasyl:1q2w3e4r-@cluster0.jtyj1.mongodb.net/FootballShop?retryWrites=true&w=majority', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 
@@ -26,15 +26,20 @@ app.get('/api/config/paypal', (req, res) => {
 });
 const __dirname = path.resolve();
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
-app.get('/',(req,res)=>{
-    res.send('Server is ready');
-});
+app.use(express.static(path.join(__dirname, '/frontend/build')));
+app.get('*', (req, res) =>
+  res.sendFile(path.join(__dirname, '/frontend/build/index.html'))
+);
+// app.get('/', (req, res) => {
+//   res.send('Server is ready');
+// });
+
 app.use((err, req, res, next) => {
   res.status(500).send({ message: err.message });
 });
 
 // eslint-disable-next-line no-undef
 const port=process.env.PORT || 5000;
-app.listen(5000, ()=>{
+app.listen(port, ()=>{
     console.log(`Server at http://localhost:${port}`);    
 });
