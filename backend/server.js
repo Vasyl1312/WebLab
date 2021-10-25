@@ -12,7 +12,7 @@ const app=express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // eslint-disable-next-line no-undef
-mongoose.connect(process.env.MONGODB_URL ||'mongodb+srv://vasyl:1q2w3e4r-@cluster0.jtyj1.mongodb.net/FootballShop?retryWrites=true&w=majority', {
+mongoose.connect(process.env.MONGODB_URL ||'mongodb+srv://Sasha:loloshka2002@cluster0.jtyj1.mongodb.net/FootballShop?retryWrites=true&w=majority', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 
@@ -23,6 +23,9 @@ app.use('/api/products', productRouter);
 app.use('/api/orders', orderRouter);
 app.get('/api/config/paypal', (req, res) => {
   res.send(process.env.PAYPAL_CLIENT_ID || 'sb');
+});
+app.get('/api/config/google', (req, res) => {
+  res.send(process.env.GOOGLE_API_KEY || 'AIzaSyB2-RUaS-cPAqOUMBuJOjV37WSYHDHMJSs');
 });
 const __dirname = path.resolve();
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
