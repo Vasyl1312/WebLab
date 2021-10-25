@@ -7,6 +7,14 @@ const data={
       email: 'vasylhryts74@gmail.com',
       password: bcrypt.hashSync('1234', 8),
       isAdmin: true,
+      isSeller: true,
+      seller: {
+        name: 'Sasha',
+        logo: '/images/logo1.png',
+        description: 'The best',
+        rating: 4.5,
+        numReviews: 120,
+      },
     },
     {
       name: 'Alex',
@@ -16,8 +24,7 @@ const data={
     },
   ],
     products:[
-        {
-           
+        {    
       name: 'Barcelona Shirt',
       category: 'Shirts',
       image: '/images/Barcelona.jpg',
